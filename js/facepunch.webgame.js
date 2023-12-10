@@ -1,5 +1,5 @@
-document.write('<script src="/js/replay.js"></script>');
-document.write('<script src="/js/replay.build.js"></script>');
+document.write('<script src="/source-map-viewer/js/replay.js"></script>');
+document.write('<script src="/source-map-viewer/js/replay.build.js"></script>');
 
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
