@@ -732,7 +732,7 @@ class VBSP {
         }
         function integrateWasmJS() {
             var wasmTextFile = "vbsp.wast";
-            var wasmBinaryFile = "/js/vbsp.core.wasm";
+            var wasmBinaryFile = "/source-map-viewer/js/vbsp.core.wasm";
             var asmjsCodeFile = "vbsp.temp.asm.js";
             if (typeof Module["locateFile"] === "function") {
                 if (!isDataURI(wasmTextFile)) {
@@ -3641,7 +3641,7 @@ class VBSP {
                 }
             }
             );
-            color_req.open("GET", "/js/vbsp.colors.json", true);
+            color_req.open("GET", "/source-map-viewer/js/vbsp.colors.json", true);
             color_req.send();
         }
         );
