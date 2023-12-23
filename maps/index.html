@@ -131,7 +131,10 @@
 					tmp_bytes.push(dataView.getInt32(current_pos + i * 4));
 				}
 				for (let i = 0; i < tmp_bytes.length; i++) {
-					temp_str += String.fromCharCode(tmp_bytes[i]);
+					for (let j = 0; j < 4; j++) {
+						let byte = (tmp_bytes[i] >> (j * 8)) & 0xFF;
+						temp_str += String.fromCharCode(byte);
+					}
 				}
 				console.log("Mapname：", temp_str);
 				current_pos += MAX_RECFILE_MAPNAME_CELL * 4;
@@ -140,12 +143,16 @@
 				const MAX_RECFILE_PLYNAME_CELL = MAX_RECFILE_PLYNAME / 4
 
 				// 一次性读取 MAX_RECFILE_PLYNAME_CELL 个字节
+				temp_str = ''; // 重置 temp_str
 				tmp_bytes = [];
 				for (let i = 0; i < MAX_RECFILE_PLYNAME_CELL; i++) {
 					tmp_bytes.push(dataView.getInt32(current_pos + i * 4));
 				}
 				for (let i = 0; i < tmp_bytes.length; i++) {
-					temp_str += String.fromCharCode(tmp_bytes[i]);
+					for (let j = 0; j < 4; j++) {
+						let byte = (tmp_bytes[i] >> (j * 8)) & 0xFF;
+						temp_str += String.fromCharCode(byte);
+					}
 				}
 				console.log("Playername：", temp_str);
 				current_pos += MAX_RECFILE_PLYNAME_CELL * 4;
