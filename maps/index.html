@@ -124,7 +124,7 @@
 
 				// 一次性读取 MAX_RECFILE_MAPNAME_CELL 个字节
 				const MAX_RECFILE_MAPNAME = 64
-				const MAX_RECFILE_MAPNAME_CELL = MAX_RECFILE_MAPNAME / 4
+				const MAX_RECFILE_MAPNAME_CELL = MAX_RECFILE_MAPNAME
 				tmp_bytes = [];
 				for (let i = 0; i < MAX_RECFILE_MAPNAME_CELL; i++) tmp_bytes.push(dataView.getInt32(current_pos + i * 4));
 				current_pos += MAX_RECFILE_MAPNAME_CELL * 4;
@@ -139,14 +139,12 @@
 				}
 				console.log(tmp_str);
 
-
 				// 一次性读取 MAX_RECFILE_PLYNAME_CELL 个字节
 				const MAX_RECFILE_PLYNAME = 32
-				const MAX_RECFILE_PLYNAME_CELL = MAX_RECFILE_PLYNAME / 4
+				const MAX_RECFILE_PLYNAME_CELL = MAX_RECFILE_PLYNAME
 				tmp_bytes = [];
 				for (let i = 0; i < MAX_RECFILE_PLYNAME_CELL; i++) tmp_bytes.push(dataView.getInt32(current_pos + i * 4));
 				current_pos += MAX_RECFILE_PLYNAME_CELL * 4;
-				console.log(tmp_bytes);
 				tmp_str = '';
 				for (let i = 0; i < 2; i++) {
 					for (let j = 3; j >= 0; j--) {
