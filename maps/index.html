@@ -96,6 +96,7 @@
 				const dataView = new DataView(arrayBuffer);
 				let current_pos = 0;
 				let tmp_bytes;
+				let tmp_str;
 
 				const INF_MAGIC = dataView.getInt32(current_pos);
 				current_pos += 4;
@@ -121,14 +122,23 @@
 				const style = dataView.getInt32(current_pos, true);
 				current_pos += 4;
 
+				// 一次性读取 MAX_RECFILE_MAPNAME_CELL 个字节
 				const MAX_RECFILE_MAPNAME = 64
 				const MAX_RECFILE_MAPNAME_CELL = MAX_RECFILE_MAPNAME / 4
-
-				// 一次性读取 MAX_RECFILE_MAPNAME_CELL 个字节
 				tmp_bytes = [];
 				for (let i = 0; i < MAX_RECFILE_MAPNAME_CELL; i++) tmp_bytes.push(dataView.getInt32(current_pos + i * 4));
 				current_pos += MAX_RECFILE_MAPNAME_CELL * 4;
-				console.log(tmp_bytes);
+				tmp_str = '';
+				for (let i = 0; i < 2; i++) {
+					for (let j = 3; j >= 0; j--) {
+						let charCode = (tmp_bytes[i] >>> (j * 8)) & 0xFF;
+						if (charCode !== 0) {
+							tmp_str += String.fromCharCode(charCode);
+						}
+					}
+				}
+				console.log(tmp_str);
+
 
 				// 一次性读取 MAX_RECFILE_PLYNAME_CELL 个字节
 				const MAX_RECFILE_PLYNAME = 32
@@ -137,6 +147,16 @@
 				for (let i = 0; i < MAX_RECFILE_PLYNAME_CELL; i++) tmp_bytes.push(dataView.getInt32(current_pos + i * 4));
 				current_pos += MAX_RECFILE_PLYNAME_CELL * 4;
 				console.log(tmp_bytes);
+				tmp_str = '';
+				for (let i = 0; i < 2; i++) {
+					for (let j = 3; j >= 0; j--) {
+						let charCode = (tmp_bytes[i] >>> (j * 8)) & 0xFF;
+						if (charCode !== 0) {
+							tmp_str += String.fromCharCode(charCode);
+						}
+					}
+				}
+				console.log(tmp_str);
 
 				const rp_length = dataView.getInt32(current_pos, true);
 				current_pos += 4;
