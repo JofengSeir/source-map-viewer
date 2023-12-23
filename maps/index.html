@@ -124,45 +124,24 @@
 				const MAX_RECFILE_MAPNAME = 64
 				const MAX_RECFILE_MAPNAME_CELL = MAX_RECFILE_MAPNAME / 4
 
-				let temp_str = '';
 				// 一次性读取 MAX_RECFILE_MAPNAME_CELL 个字节
 				tmp_bytes = [];
-				for (let i = 0; i < MAX_RECFILE_MAPNAME_CELL; i++) {
-					tmp_bytes.push(dataView.getInt32(current_pos + i * 4));
-				}
-				for (let i = 0; i < tmp_bytes.length; i++) {
-					for (let j = 0; j < 4; j++) {
-						let byte = (tmp_bytes[i] >> (j * 8)) & 0xFF;
-						temp_str += String.fromCharCode(byte);
-					}
-				}
-				console.log("Mapname：", temp_str);
+				for (let i = 0; i < MAX_RECFILE_MAPNAME_CELL; i++) tmp_bytes.push(dataView.getInt32(current_pos + i * 4));
 				current_pos += MAX_RECFILE_MAPNAME_CELL * 4;
-
-				const MAX_RECFILE_PLYNAME = 32
-				const MAX_RECFILE_PLYNAME_CELL = MAX_RECFILE_PLYNAME / 4
+				console.log(tmp_bytes);
 
 				// 一次性读取 MAX_RECFILE_PLYNAME_CELL 个字节
-				temp_str = ''; // 重置 temp_str
+				const MAX_RECFILE_PLYNAME = 32
+				const MAX_RECFILE_PLYNAME_CELL = MAX_RECFILE_PLYNAME / 4
 				tmp_bytes = [];
-				for (let i = 0; i < MAX_RECFILE_PLYNAME_CELL; i++) {
-					tmp_bytes.push(dataView.getInt32(current_pos + i * 4));
-				}
-				for (let i = 0; i < tmp_bytes.length; i++) {
-					for (let j = 0; j < 4; j++) {
-						let byte = (tmp_bytes[i] >> (j * 8)) & 0xFF;
-						temp_str += String.fromCharCode(byte);
-					}
-				}
-				console.log("Playername：", temp_str);
+				for (let i = 0; i < MAX_RECFILE_PLYNAME_CELL; i++) tmp_bytes.push(dataView.getInt32(current_pos + i * 4));
 				current_pos += MAX_RECFILE_PLYNAME_CELL * 4;
+				console.log(tmp_bytes);
 
 				const rp_length = dataView.getInt32(current_pos, true);
 				current_pos += 4;
 
-				const REC_SIZE = 6;
 				REC_ARRAY = [];
-
 				for (let i = 0; i < rp_length; i++) {
 					let pos = [];
 					let ang = [];
