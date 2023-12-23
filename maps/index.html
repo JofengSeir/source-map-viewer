@@ -124,12 +124,16 @@
 				const MAX_RECFILE_MAPNAME = 64
 				const MAX_RECFILE_MAPNAME_CELL = MAX_RECFILE_MAPNAME / 4
 
+				let temp_str = '';
 				// 一次性读取 MAX_RECFILE_MAPNAME_CELL 个字节
 				tmp_bytes = [];
 				for (let i = 0; i < MAX_RECFILE_MAPNAME_CELL; i++) {
 					tmp_bytes.push(dataView.getInt32(current_pos + i * 4));
 				}
-				console.log("Mapname：", tmp_bytes);
+				for (let i = 0; i < tmp_bytes.length; i++) {
+					temp_str += String.fromCharCode(tmp_bytes[i]);
+				}
+				console.log("Mapname：", temp_str);
 				current_pos += MAX_RECFILE_MAPNAME_CELL * 4;
 
 				const MAX_RECFILE_PLYNAME = 32
@@ -140,7 +144,10 @@
 				for (let i = 0; i < MAX_RECFILE_PLYNAME_CELL; i++) {
 					tmp_bytes.push(dataView.getInt32(current_pos + i * 4));
 				}
-				console.log("Playername：", tmp_bytes);
+				for (let i = 0; i < tmp_bytes.length; i++) {
+					temp_str += String.fromCharCode(tmp_bytes[i]);
+				}
+				console.log("Playername：", temp_str);
 				current_pos += MAX_RECFILE_PLYNAME_CELL * 4;
 
 				const rp_length = dataView.getInt32(current_pos, true);
